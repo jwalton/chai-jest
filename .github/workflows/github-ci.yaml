@@ -1,0 +1,23 @@
+name: GitHub CI
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x]
+    steps:
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm install
+      - run: npm test
+      - name: semantic-release
+        if: success() && github.ref == 'refs/heads/master'
+        run: npm run semantic-release
+        env:
+          GH_TOKEN: ${{ secrets.DEPLOY_GH_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
