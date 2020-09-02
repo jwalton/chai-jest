@@ -15,8 +15,9 @@ function wrapJestExpect(
     fn: () => void,
     failMessage: string,
     notFailMessage: string,
-    expected: unknown,
-    actual?: unknown
+    expected?: unknown,
+    actual?: unknown,
+    showDiff?: boolean
 ) {
     let success = true;
     try {
@@ -24,7 +25,7 @@ function wrapJestExpect(
     } catch (err) {
         success = false;
     }
-    self.assert(success, failMessage, notFailMessage, expected, actual);
+    self.assert(success, failMessage, notFailMessage, expected, actual, showDiff);
 }
 
 const chaiJest: Chai.ChaiPlugin = (chai) => {
@@ -44,13 +45,18 @@ const chaiJest: Chai.ChaiPlugin = (chai) => {
         assertIsMock(this._obj);
         const mock = this._obj as jest.Mock;
 
+        const failMessage = `expected mock to have been called\n\n` +
+            `Expected number of calls: >= 1\n` +
+            `Received number of calls:    0`;
+        const notFailMessage = `expected mock to not have been called\n\n` +
+            `Expected number of calls: 0\n` +
+            `Received number of calls: ${getCallCount(mock)}`;
+
         wrapJestExpect(
             this,
             () => expect(mock).toHaveBeenCalled(),
-            `expected mock to have been called`,
-            `expected mock to not have been called`,
-            '> 0',
-            getCallCount(mock)
+            failMessage,
+            notFailMessage
         );
     });
 
@@ -115,13 +121,12 @@ const chaiJest: Chai.ChaiPlugin = (chai) => {
         assertIsMock(this._obj);
         const mock = this._obj as jest.Mock;
 
+
         wrapJestExpect(
             this,
             () => expect(mock).toHaveReturned(),
             `expected mock to have returned`,
             `expected mock to not have returned`,
-            '> 0',
-            getReturnCount(mock)
         );
     });
 
