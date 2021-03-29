@@ -55,7 +55,7 @@
     "coveralls": "^3.1.0",
     "eslint": "^7.7.0",
     "eslint-config-prettier": "^7.0.0",
-    "husky": "^5.0.9",
+    "husky": "^6.0.0",
     "jest": "^26.4.2",
     "lint-staged": "^10.2.13",
     "prettier": "^2.1.1",
