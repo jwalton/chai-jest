@@ -67,6 +67,6 @@
         "typescript": "^4.0.2"
     },
     "dependencies": {
-        "expect": "^26.4.2"
+        "expect": "^27.0.6"
     }
 }
