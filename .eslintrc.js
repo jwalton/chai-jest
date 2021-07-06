@@ -3,12 +3,7 @@ module.exports = {
     parserOptions: {
         project: ['./tsconfig.json', './test/tsconfig.json'],
     },
-    extends: [
-        'eslint:recommended',
-        'plugin:@typescript-eslint/recommended',
-        'prettier',
-        'prettier/@typescript-eslint',
-    ],
+    extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'prettier'],
     rules: {
         '@typescript-eslint/explicit-function-return-type': 'off',
         '@typescript-eslint/no-explicit-any': 'off',
