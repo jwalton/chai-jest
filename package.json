@@ -1,76 +1,72 @@
 {
-  "name": "chai-jest",
-  "version": "0.0.0-semantic-release",
-  "description": "Chai bindings for jest mocks.",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "files": [
-    "dist/**/*"
-  ],
-  "scripts": {
-    "test": "npm run build && npm run lint && npm run test:unittest",
-    "build": "tsc",
-    "clean": "rm -rf dist types coverage",
-    "test:unittest": "tsc -p test && jest",
-    "precommit:test": "lint-staged && npm run precommit:unittest",
-    "lint": "npm run lint:source && npm run lint:tests",
-    "lint:source": "eslint --ext .ts --ext .tsx src",
-    "lint:tests": "eslint --ext .ts --ext .tsx test",
-    "prepare": "npm run build",
-    "prepublishOnly": "npm run build && npm test",
-    "semantic-release": "semantic-release"
-  },
-  "lint-staged": {
-    "**/*.ts": [
-      "eslint --ext ts --ext tsx"
-    ]
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jwalton/chai-jest.git"
-  },
-  "keywords": [
-    "chai",
-    "jest",
-    "unittest",
-    "test"
-  ],
-  "author": {
-    "name": "Jason Walton",
-    "email": "dev@lucid.thedreaming.org",
-    "url": "https://www.thedreaming.org"
-  },
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/exegesis-js/jwalton/chai-jest/issues"
-  },
-  "homepage": "https://github.com/jwalton/chai-jest#readme",
-  "devDependencies": {
-    "@types/chai": "^4.2.12",
-    "@types/node": "^14.10.1",
-    "@typescript-eslint/eslint-plugin": "^4.0.0",
-    "@typescript-eslint/parser": "^4.1.1",
-    "chai": "^4.2.0",
-    "chai-as-promised": "^7.1.1",
-    "coveralls": "^3.1.0",
-    "eslint": "^7.7.0",
-    "eslint-config-prettier": "^7.0.0",
-    "husky": "^5.0.9",
-    "jest": "^26.4.2",
-    "lint-staged": "^10.2.13",
-    "prettier": "^2.1.1",
-    "pretty-quick": "^3.0.0",
-    "semantic-release": "^17.1.1",
-    "ts-jest": "^26.3.0",
-    "ts-node": "^9.0.0",
-    "typescript": "^4.0.2"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "pretty-quick --staged"
+    "name": "chai-jest",
+    "version": "0.0.0-semantic-release",
+    "description": "Chai bindings for jest mocks.",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "files": [
+        "dist/**/*"
+    ],
+    "scripts": {
+        "test": "npm run build && npm run lint && npm run test:unittest",
+        "build": "tsc",
+        "clean": "rm -rf dist types coverage",
+        "test:unittest": "tsc -p test && jest",
+        "precommit:test": "lint-staged && npm run precommit:unittest",
+        "lint": "npm run lint:source && npm run lint:tests",
+        "lint:source": "eslint --ext .ts --ext .tsx src",
+        "lint:tests": "eslint --ext .ts --ext .tsx test",
+        "prepare": "husky install && npm run build",
+        "prepublishOnly": "npm run build && npm test",
+        "semantic-release": "semantic-release"
+    },
+    "lint-staged": {
+        "**/*.ts": [
+            "eslint --ext ts --ext tsx"
+        ]
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/jwalton/chai-jest.git"
+    },
+    "keywords": [
+        "chai",
+        "jest",
+        "unittest",
+        "test"
+    ],
+    "author": {
+        "name": "Jason Walton",
+        "email": "dev@lucid.thedreaming.org",
+        "url": "https://www.thedreaming.org"
+    },
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/exegesis-js/jwalton/chai-jest/issues"
+    },
+    "homepage": "https://github.com/jwalton/chai-jest#readme",
+    "devDependencies": {
+        "@types/chai": "^4.2.12",
+        "@types/jest": "^26.0.23",
+        "@types/node": "^14.10.1",
+        "@typescript-eslint/eslint-plugin": "^4.0.0",
+        "@typescript-eslint/parser": "^4.1.1",
+        "chai": "^4.2.0",
+        "chai-as-promised": "^7.1.1",
+        "coveralls": "^3.1.0",
+        "eslint": "^7.7.0",
+        "eslint-config-prettier": "^7.0.0",
+        "husky": "^7.0.1",
+        "jest": "^26.4.2",
+        "lint-staged": "^10.2.13",
+        "prettier": "^2.1.1",
+        "pretty-quick": "^3.0.0",
+        "semantic-release": "^17.1.1",
+        "ts-jest": "^26.3.0",
+        "ts-node": "^9.0.0",
+        "typescript": "^4.0.2"
+    },
+    "dependencies": {
+        "expect": "^26.4.2"
     }
-  },
-  "dependencies": {
-    "expect": "^26.4.2"
-  }
 }
