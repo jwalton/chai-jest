@@ -45,63 +45,74 @@ const chaiJest: Chai.ChaiPlugin = (chai) => {
         assertIsMock(this._obj);
         const mock = this._obj as jest.Mock;
 
-        const failMessage = `expected mock to have been called\n\n` +
+        const failMessage =
+            `expected mock to have been called\n\n` +
             `Expected number of calls: >= 1\n` +
             `Received number of calls:    0`;
-        const notFailMessage = `expected mock to not have been called\n\n` +
+        const notFailMessage =
+            `expected mock to not have been called\n\n` +
             `Expected number of calls: 0\n` +
             `Received number of calls: ${getCallCount(mock)}`;
 
-        wrapJestExpect(
-            this,
-            () => expect(mock).toHaveBeenCalled(),
-            failMessage,
-            notFailMessage
-        );
+        wrapJestExpect(this, () => expect(mock).toHaveBeenCalled(), failMessage, notFailMessage);
     });
 
-    chai.Assertion.addMethod('beenCalledWith', function (...args: unknown[]) {
-        assertIsMock(this._obj);
-        const mock = this._obj as jest.Mock;
+    chai.Assertion.addMethod(
+        'beenCalledWith',
+        function (expected_0: unknown, ...expected_1: unknown[]) {
+            assertIsMock(this._obj);
+            const mock = this._obj as jest.Mock;
+            const args = [expected_0, ...expected_1];
 
-        wrapJestExpect(
-            this,
-            () => expect(mock).toHaveBeenCalledWith(...args),
-            `expected mock to have been called with arguments ${args.join(', ')}`,
-            `expected mock to not have been called with arguments ${args.join(', ')}`,
-            args
-        );
-    });
+            wrapJestExpect(
+                this,
+                () => expect(mock).toHaveBeenCalledWith(expected_0, ...expected_1),
+                `expected mock to have been called with arguments ${args.join(', ')}`,
+                `expected mock to not have been called with arguments ${args.join(', ')}`,
+                expected_1
+            );
+        }
+    );
 
-    chai.Assertion.addMethod('beenLastCalledWith', function (...args: unknown[]) {
-        assertIsMock(this._obj);
-        const mock = this._obj as jest.Mock;
+    chai.Assertion.addMethod(
+        'beenLastCalledWith',
+        function (expected_0: unknown, ...expected_1: unknown[]) {
+            assertIsMock(this._obj);
+            const mock = this._obj as jest.Mock;
+            const args = [expected_0, ...expected_1];
 
-        wrapJestExpect(
-            this,
-            () => expect(mock).toHaveBeenLastCalledWith(...args),
-            `expected mock to have been last called with arguments ${args.join(', ')}`,
-            `expected mock to not have been last called with arguments ${args.join(', ')}`,
-            args,
-            mock.mock.calls[mock.mock.calls.length - 1]
-        );
-    });
+            wrapJestExpect(
+                this,
+                () => expect(mock).toHaveBeenLastCalledWith(expected_0, ...expected_1),
+                `expected mock to have been last called with arguments ${args.join(', ')}`,
+                `expected mock to not have been last called with arguments ${args.join(', ')}`,
+                expected_1,
+                mock.mock.calls[mock.mock.calls.length - 1]
+            );
+        }
+    );
 
-    chai.Assertion.addMethod('beenNthCalledWith', function (nthCall: number, ...args: unknown[]) {
-        assertIsMock(this._obj);
-        const mock = this._obj as jest.Mock;
+    chai.Assertion.addMethod(
+        'beenNthCalledWith',
+        function (nthCall: number, expected_0: unknown, ...expected_1: unknown[]) {
+            assertIsMock(this._obj);
+            const mock = this._obj as jest.Mock;
+            const args = [expected_0, ...expected_1];
 
-        wrapJestExpect(
-            this,
-            () => expect(mock).toHaveBeenNthCalledWith(nthCall, ...args),
-            `expected mock call #${nthCall} to have been called with arguments ${args.join(', ')}`,
-            `expected mock call #${nthCall} to not have been called with arguments ${args.join(
-                ', '
-            )}`,
-            args,
-            mock.mock.calls[nthCall - 1]
-        );
-    });
+            wrapJestExpect(
+                this,
+                () => expect(mock).toHaveBeenNthCalledWith(nthCall, expected_0, ...expected_1),
+                `expected mock call #${nthCall} to have been called with arguments ${args.join(
+                    ', '
+                )}`,
+                `expected mock call #${nthCall} to not have been called with arguments ${args.join(
+                    ', '
+                )}`,
+                expected_1,
+                mock.mock.calls[nthCall - 1]
+            );
+        }
+    );
 
     chai.Assertion.addMethod('beenCalledTimes', function (times: number) {
         assertIsMock(this._obj);
@@ -121,12 +132,11 @@ const chaiJest: Chai.ChaiPlugin = (chai) => {
         assertIsMock(this._obj);
         const mock = this._obj as jest.Mock;
 
-
         wrapJestExpect(
             this,
             () => expect(mock).toHaveReturned(),
             `expected mock to have returned`,
-            `expected mock to not have returned`,
+            `expected mock to not have returned`
         );
     });
 
